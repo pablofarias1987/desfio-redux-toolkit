@@ -1,15 +1,21 @@
 import React, { useEffect } from "react";
 import "./styles.css";
-import { fetchAllTask, deletedTa, deleteTask } from "../../features/counter/pruebaSlider";
+import { fetchAllTask, deletedTa, deleteTask, editTask } from "../../features/counter/pruebaSlider";
 import { useDispatch, useSelector } from "react-redux";
 import TodoListItem from "components/TodoListItem";
 
 const TodoList = () => {
   const dispatch = useDispatch()
-  const handleDelete = (todoId) => {
+  const handleDelete = (id) => {
     // Fix an ability to delete task
-    //holaaa
-    console.log(deleteTask);
+    
+ dispatch(deleteTask(id))
+  };
+
+
+  const handleEdit = (id) => {
+    
+ dispatch(editTask(id))
   };
 
   const toggleCheck = (todoId, isChecked) => {
@@ -35,6 +41,7 @@ const TodoList = () => {
             <input type="checkbox" />
             {element.label}
             <button className="button" type="submit" onClick={() => handleDelete(element.id)}>x</button>
+            <button className="button" type="submit" onClick={() => handleEdit(element.id)}>Editar</button>
           </p>
           </div>
           )
@@ -44,8 +51,6 @@ const TodoList = () => {
       </div>
       <div className="no-todos">
         Looks like you&apos;re absolutely free today!
-
-        
       </div>
     </div>
   );
